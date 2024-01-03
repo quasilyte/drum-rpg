@@ -27,6 +27,31 @@ const (
 	_numInstruments
 )
 
+func InstrumentKindByName(name string) InstrumentKind {
+	switch name {
+	case "Bass":
+		return BassInstrument
+	case "Snare":
+		return SnareInstrument
+	case "LeftTom":
+		return LeftTomInstrument
+	case "RightTom":
+		return RightTomInstrument
+	case "FloorTom":
+		return FloorTomInstrument
+	case "ClosedHiHat":
+		return ClosedHiHatInstrument
+	case "OpenHiHat":
+		return OpenHiHatInstrument
+	case "LeftCymbal":
+		return LeftCymbalInstrument
+	case "RightCymbal":
+		return RightCymbalInstrument
+	default:
+		return UndefinedInstrument
+	}
+}
+
 type Instrument struct {
 	SampleSelection SampleSelection
 

@@ -25,7 +25,7 @@ func (t *floatingTextNode) IsDisposed() bool {
 }
 
 func (t *floatingTextNode) Init(scene *ge.Scene) {
-	t.decaySpeed = scene.Rand().FloatRange(0.6, 1.0)
+	t.decaySpeed = scene.Rand().FloatRange(0.8, 1.2)
 	t.label = ge.NewLabel(assets.BitmapFont1)
 	t.label.Text = t.text
 	t.label.Pos.Base = &t.pos
@@ -47,5 +47,5 @@ func (t *floatingTextNode) Update(delta float64) {
 		return
 	}
 	t.label.SetAlpha(alpha)
-	t.pos.Y -= 210 * delta
+	t.pos.Y -= 300 * delta
 }

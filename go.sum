@@ -29,6 +29,8 @@ github.com/quasilyte/gmath v0.0.0-20221217210116-fba37a2e15c7 h1:mvIS9aGirkzuYmH
 github.com/quasilyte/gmath v0.0.0-20221217210116-fba37a2e15c7/go.mod h1:EbI+KMbALSVE2s0YFOQpR4uj66zBh9ter5P4CBMSuvA=
 github.com/quasilyte/gsignal v0.0.0-20231010082051-3c00e9ebb4e5 h1:G6D9dfcBvveLmNi8B7de96/347Xk8rvTyhQb6uNwWPQ=
 github.com/quasilyte/gsignal v0.0.0-20231010082051-3c00e9ebb4e5/go.mod h1:qAMDDsI56AFnSrBZYG8Tj/Ys+sRsakd8Ho2be2S8Vfc=
+github.com/quasilyte/xm v0.0.0-20231205130420-91db6da02fbe h1:mH2U2uP1OYE/rQCvrHSlmMrzqBlVIstkhwjTq5wq+eE=
+github.com/quasilyte/xm v0.0.0-20231205130420-91db6da02fbe/go.mod h1:NfR3uYC5yXgsGuSDHSXep+EiAPnNsa7/0jpWyGvRxng=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 gitlab.com/gomidi/midi/v2 v2.0.30 h1:RgRYbQeQSab5ZaP1lqRcCTnTSBQroE3CE6V9HgMmOAc=
 gitlab.com/gomidi/midi/v2 v2.0.30/go.mod h1:Y6IFFyABN415AYsFMPJb0/43TRIuVYDpGKp2gDYLTLI=

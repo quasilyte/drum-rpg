@@ -66,27 +66,8 @@ func loadSoundBank(ctx *ge.Context, audioID resource.AudioID, dir, name string) 
 	}
 
 	for instrumentTag, samples := range soundBankConfig {
-		var kind InstrumentKind
-		switch instrumentTag {
-		case "Bass":
-			kind = BassInstrument
-		case "Snare":
-			kind = SnareInstrument
-		case "LeftTom":
-			kind = LeftTomInstrument
-		case "RightTom":
-			kind = RightTomInstrument
-		case "FloorTom":
-			kind = FloorTomInstrument
-		case "ClosedHiHat":
-			kind = ClosedHiHatInstrument
-		case "OpenHiHat":
-			kind = OpenHiHatInstrument
-		case "LeftCymbal":
-			kind = LeftCymbalInstrument
-		case "RightCymbal":
-			kind = RightCymbalInstrument
-		default:
+		kind := InstrumentKindByName(instrumentTag)
+		if kind == UndefinedInstrument {
 			return nil, fmt.Errorf("unrecognized instrument type: %q", instrumentTag)
 		}
 		for _, info := range samples {

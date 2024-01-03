@@ -5,6 +5,7 @@ import (
 	"github.com/quasilyte/drum-rpg/midichan"
 	"github.com/quasilyte/drum-rpg/session"
 	"github.com/quasilyte/drum-rpg/studio"
+	"github.com/quasilyte/drum-rpg/tracker"
 	"github.com/quasilyte/ge"
 )
 
@@ -22,6 +23,24 @@ func NewTestController(state *session.State) *TestController {
 }
 
 func (c *TestController) Init(scene *ge.Scene) {
+	track := c.state.FindTrack("Arilou Theme")
+	if track == nil {
+		panic("track not found")
+	}
+	mixedTrack, err := tracker.Mix(tracker.MixerConfig{
+		Track: track,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	trackPlayer, err := scene.Audio().GetContext().NewPlayer(mixedTrack.Stream)
+	if err != nil {
+		panic(err)
+	}
+	trackPlayer.Rewind()
+	trackPlayer.Play()
+
 	colombo := c.state.FindSoundBank("ColomboADK FreePats")
 	c.drumkit = edrum.NewKit(edrum.RolandTD02kvMap, map[edrum.InstrumentKind]*edrum.Instrument{
 		edrum.BassInstrument:        edrum.NewInstrument(edrum.RandomSampleSelection, colombo.Samples[edrum.BassInstrument]),
