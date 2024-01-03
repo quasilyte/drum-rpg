@@ -1,0 +1,58 @@
+{
+    "Bass": [
+        {"Name": "BassDrum-LV1", "MaxVelocity": 0.25},
+        {"Name": "BassDrum-LV2", "MaxVelocity": 0.25},
+        {"Name": "BassDrum-MV1", "MinVelocity": 0.25, "MaxVelocity": 0.5},
+        {"Name": "BassDrum-MV2", "MinVelocity": 0.25, "MaxVelocity": 0.5},
+        {"Name": "BassDrum-HV1", "MinVelocity": 0.5},
+        {"Name": "BassDrum-HV2", "MinVelocity": 0.5},
+        {"Name": "BassDrum-HV3", "MinVelocity": 0.5},
+        {"Name": "BassDrum-HV4", "MinVelocity": 0.5}
+    ],
+    "LeftTom": [
+        {"Name": "HiTom-1"},
+        {"Name": "HiTom-2"},
+        {"Name": "HiTom-3"}
+    ],
+    "RightTom": [
+        {"Name": "MidTom-1"},
+        {"Name": "MidTom-2"},
+        {"Name": "MidTom-3"}
+    ],
+    "FloorTom": [
+        {"Name": "LowTom-1"},
+        {"Name": "LowTom-2"}
+    ],
+    "Snare": [
+        {"Name": "SnareDrum2-1"},
+		{"Name": "SnareDrum2-2"},
+		{"Name": "SnareDrum2-3"},
+		{"Name": "SnareDrum2-4"}
+    ],
+    "OpenHiHat": [
+        {"Name": "OpenHiHat-1"},
+		{"Name": "OpenHiHat-2"},
+		{"Name": "OpenHiHat-3"},
+		{"Name": "OpenHiHat-4"}
+    ],
+    "ClosedHiHat": [
+        {"Name": "ClosedHiHat-1"},
+		{"Name": "ClosedHiHat-2"},
+		{"Name": "ClosedHiHat-3"},
+		{"Name": "ClosedHiHat-4"},
+		{"Name": "ClosedHiHat-5"},
+		{"Name": "ClosedHiHat-6"},
+		{"Name": "ClosedHiHat-7"}
+    ],
+    "LeftCymbal": [
+        {"Name": "Cymbal16iCrash-1"},
+		{"Name": "Cymbal16iCrash-2"}
+    ],
+    "RightCymbal": [
+        {"Name": "Cymbal16iRide-MV1", "MaxVelocity": 0.5},
+		{"Name": "Cymbal16iRide-MV2", "MaxVelocity": 0.5},
+		{"Name": "Cymbal16iRide-MV3", "MaxVelocity": 0.5},
+		{"Name": "Cymbal16iRide-HV1", "MinVelocity": 0.5},
+		{"Name": "Cymbal16iRide-HV2", "MinVelocity": 0.5}
+    ]
+}
