@@ -40,7 +40,7 @@ func main() {
 		panic(fmt.Sprintf("load sound banks: %v", err))
 	}
 
-	arilouTrack, err := tracker.ParseTrack("Star Control 2", filepath.Join(contentDir, "tracks", "uqm", "arilou.xm"))
+	arilouTrack, err := tracker.ParseTrack("Star Control 2", filepath.Join(contentDir, "tracks", "uqm", "druuge.xm"))
 	if err != nil {
 		panic(err)
 	}
@@ -53,9 +53,9 @@ func main() {
 		},
 	}
 
-	// if err := state.MidiSystem.Connect("TD-02:TD-02 MIDI"); err != nil {
-	// 	panic(err)
-	// }
+	if err := state.MidiSystem.Connect("TD-02:TD-02 MIDI"); err != nil {
+		panic(err)
+	}
 
 	if err := ge.RunGame(ctx, scenes.NewTestController(state)); err != nil {
 		panic(err)

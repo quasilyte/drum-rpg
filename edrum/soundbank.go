@@ -79,7 +79,7 @@ func loadSoundBank(ctx *ge.Context, audioID resource.AudioID, dir, name string) 
 			ctx.Loader.AudioRegistry.Set(id, resource.AudioInfo{
 				Path: "$soundbank/" + fullPath,
 			})
-			fmt.Println("load", "$soundbank/"+fullPath)
+			fmt.Println("load", "$soundbank/"+fullPath, kind)
 			ctx.Loader.LoadAudio(id)
 
 			s := Sample{

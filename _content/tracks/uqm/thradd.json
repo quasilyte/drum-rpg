@@ -1,0 +1,9 @@
+{
+    "Name": "Thraddash Theme",
+    "Author": "Riku Nuottajärvi",
+    "Instruments": {
+        "ClosedHiHat": 5,
+        "Snare": 4,
+        "Bass": 2
+    }
+}

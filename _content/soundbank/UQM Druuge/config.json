@@ -1,0 +1,14 @@
+{
+    "Bass": [
+        {"Name": "bass"}
+    ],
+    "Snare": [
+        {"Name": "snare"}
+    ],
+    "LeftTom": [
+        {"Name": "tom"}
+    ],
+    "RightTom": [
+        {"Name": "tom"}
+    ]
+}

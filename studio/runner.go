@@ -1,35 +1,45 @@
 package studio
 
 import (
-	"fmt"
-
 	"github.com/quasilyte/drum-rpg/assets"
 	"github.com/quasilyte/drum-rpg/edrum"
 	"github.com/quasilyte/drum-rpg/midichan"
 	"github.com/quasilyte/drum-rpg/session"
+	"github.com/quasilyte/drum-rpg/tracker"
 	"github.com/quasilyte/ge"
 	"github.com/quasilyte/gmath"
 )
 
 type Runner struct {
+	scene *ge.Scene
+
 	bg         *ge.Sprite
 	state      *session.State
 	drumPlayer *midichan.Player
+	mixedTrack *tracker.MixedTrack
+
+	t               float64
+	visibleNotes    []*noteBarNode
+	channelProgress [4]int
 }
 
 type RunnerConfig struct {
 	State      *session.State
 	DrumPlayer *midichan.Player
+	MixedTrack *tracker.MixedTrack
 }
 
 func NewRunner(config RunnerConfig) *Runner {
 	return &Runner{
 		state:      config.State,
 		drumPlayer: config.DrumPlayer,
+		mixedTrack: config.MixedTrack,
 	}
 }
 
 func (r *Runner) Init(scene *ge.Scene) {
+	r.scene = scene
+
 	bg := scene.NewSprite(assets.ImageTrackBg)
 	bg.Centered = false
 	bg.Pos.Offset.X = 32
@@ -52,7 +62,7 @@ func (r *Runner) Init(scene *ge.Scene) {
 	}
 
 	r.drumPlayer.EventNote.Connect(nil, func(info midichan.NoteEventInfo) {
-		channelID := r.getInstrumentChannel(info.Instrument)
+		channelID := info.Instrument.Channel()
 		pos := r.getChannelGatePos(channelID)
 
 		e := newEffectNode(pos.Add(gmath.Vec{X: scene.Rand().FloatRange(-2, 2)}), assets.ImageNoteEffect)
@@ -86,26 +96,59 @@ func (r *Runner) Init(scene *ge.Scene) {
 	})
 }
 
-func (r *Runner) Update(delta float64) {}
+func (r *Runner) Update(delta float64) {
+	// Maybe spawn new notes.
+	{
+		for i, notes := range r.mixedTrack.InputChannels {
+			currentNoteIndex := r.channelProgress[i]
+			if currentNoteIndex >= len(notes) {
+				continue // No more notes in this channel
+			}
+			currentNote := notes[currentNoteIndex]
+			y := r.calcNoteY(currentNote.Time)
+			if y < -32 {
+				continue
+			}
+			r.channelProgress[i]++
+			n := newNoteBar(i, currentNote)
+			n.Pos.X = r.getChannelGatePos(i).X - 1
+			n.Pos.Y = y
+			n.Init(r.scene)
+			r.visibleNotes = append(r.visibleNotes, n)
+		}
+	}
+
+	// Advance the visible notes.
+	{
+		visibleNotes := r.visibleNotes[:0]
+		for _, n := range r.visibleNotes {
+			n.Pos.Y = r.calcNoteY(n.Time)
+			if n.Pos.Y > (1080.0/2 + 32.0) {
+				n.Dispose()
+				continue
+			}
+			visibleNotes = append(visibleNotes, n)
+		}
+		r.visibleNotes = visibleNotes
+	}
+
+	r.t += delta
+}
+
+func (r *Runner) calcNoteY(noteTime float64) float64 {
+	const (
+		height           float64 = 1080.0 / 2
+		gateThreshold    float64 = 64.0 / height
+		secondsPerScreen float64 = 3.0
+		gateTimeTail     float64 = secondsPerScreen * gateThreshold
+	)
+	timeBaseline := r.t - gateTimeTail + secondsPerScreen
+	return ((timeBaseline - noteTime) / secondsPerScreen) * height
+}
 
 func (r *Runner) getChannelGatePos(id int) gmath.Vec {
 	return gmath.Vec{
 		X: r.bg.Pos.Offset.X + 49 + (float64(id) * 128),
 		Y: 1080.0/2 - 64.0,
 	}
-}
-
-func (r *Runner) getInstrumentChannel(kind edrum.InstrumentKind) int {
-	switch kind {
-	case edrum.OpenHiHatInstrument, edrum.ClosedHiHatInstrument, edrum.LeftCymbalInstrument, edrum.RightCymbalInstrument:
-		return 0
-	case edrum.SnareInstrument:
-		return 1
-	case edrum.LeftTomInstrument, edrum.RightTomInstrument, edrum.FloorTomInstrument:
-		return 2
-	case edrum.BassInstrument:
-		return 3
-	}
-
-	panic(fmt.Errorf("unexpected instrument kind: %v", kind))
 }

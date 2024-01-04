@@ -1,6 +1,8 @@
 package edrum
 
 import (
+	"fmt"
+
 	resource "github.com/quasilyte/ebitengine-resource"
 	"github.com/quasilyte/gmath"
 )
@@ -26,6 +28,21 @@ const (
 
 	_numInstruments
 )
+
+func (kind InstrumentKind) Channel() int {
+	switch kind {
+	case OpenHiHatInstrument, ClosedHiHatInstrument, LeftCymbalInstrument, RightCymbalInstrument:
+		return 0
+	case SnareInstrument:
+		return 1
+	case LeftTomInstrument, RightTomInstrument, FloorTomInstrument:
+		return 2
+	case BassInstrument:
+		return 3
+	}
+
+	panic(fmt.Errorf("unexpected instrument kind: %v", kind))
+}
 
 func InstrumentKindByName(name string) InstrumentKind {
 	switch name {

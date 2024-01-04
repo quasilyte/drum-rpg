@@ -1,0 +1,9 @@
+{
+    "Name": "Ilwrath Theme",
+    "Author": "Dan Nicholson",
+    "Instruments": {
+        "RightTom": 4,
+        "Snare": 2,
+        "Bass": 5
+    }
+}

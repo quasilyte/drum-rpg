@@ -1,0 +1,10 @@
+{
+    "Name": "Druuge Theme",
+    "Author": "Dan Nicholson",
+    "Instruments": {
+        "Snare": 2,
+        "Bass": 3,
+        "LeftTom": 6,
+        "RightTom": 7
+    }
+}

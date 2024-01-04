@@ -1,0 +1,9 @@
+{
+    "Name": "HyperSpace",
+    "Author": "Riku Nuottajärvi",
+    "Instruments": {
+        "ClosedHiHat": 7,
+        "Snare": 5,
+        "Bass": 6
+    }
+}

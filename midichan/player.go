@@ -59,7 +59,7 @@ func (p *Player) onMidiMessage(msg midi.Message) {
 		}
 		samples := inst.GetSamples(velocity)
 		if len(samples) == 0 {
-			// fmt.Println("note on: found no samples for the note", velocity, note)
+			// fmt.Println("note on: found no samples for the note", velocity, note, instKind)
 			return
 		}
 		sampleID := gmath.RandElem(p.scene.Rand(), samples)

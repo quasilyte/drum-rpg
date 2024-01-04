@@ -23,7 +23,11 @@ func NewTestController(state *session.State) *TestController {
 }
 
 func (c *TestController) Init(scene *ge.Scene) {
-	track := c.state.FindTrack("Arilou Theme")
+	track := c.state.FindTrack("Druuge Theme")
+	// track := c.state.FindTrack("Ilwrath Theme")
+	// track := c.state.FindTrack("Thraddash Theme")
+	// track := c.state.FindTrack("Arilou Theme")
+	// track := c.state.FindTrack("HyperSpace")
 	if track == nil {
 		panic("track not found")
 	}
@@ -39,9 +43,13 @@ func (c *TestController) Init(scene *ge.Scene) {
 		panic(err)
 	}
 	trackPlayer.Rewind()
+	trackPlayer.SetVolume(0.5)
 	trackPlayer.Play()
 
-	colombo := c.state.FindSoundBank("ColomboADK FreePats")
+	// colombo := c.state.FindSoundBank("ColomboADK FreePats")
+	// colombo := c.state.FindSoundBank("UQM Arilou")
+	// colombo := c.state.FindSoundBank("UQM Ilwrath")
+	colombo := c.state.FindSoundBank("UQM Druuge")
 	c.drumkit = edrum.NewKit(edrum.RolandTD02kvMap, map[edrum.InstrumentKind]*edrum.Instrument{
 		edrum.BassInstrument:        edrum.NewInstrument(edrum.RandomSampleSelection, colombo.Samples[edrum.BassInstrument]),
 		edrum.LeftTomInstrument:     edrum.NewInstrument(edrum.RandomSampleSelection, colombo.Samples[edrum.LeftTomInstrument]),
@@ -60,6 +68,7 @@ func (c *TestController) Init(scene *ge.Scene) {
 	c.runner = studio.NewRunner(studio.RunnerConfig{
 		State:      c.state,
 		DrumPlayer: c.player,
+		MixedTrack: mixedTrack,
 	})
 	c.runner.Init(scene)
 }
