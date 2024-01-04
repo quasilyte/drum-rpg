@@ -43,7 +43,7 @@ func (c *TestController) Init(scene *ge.Scene) {
 		panic(err)
 	}
 	trackPlayer.Rewind()
-	trackPlayer.SetVolume(0.5)
+	trackPlayer.SetVolume(0.65)
 	trackPlayer.Play()
 
 	// colombo := c.state.FindSoundBank("ColomboADK FreePats")
@@ -69,6 +69,7 @@ func (c *TestController) Init(scene *ge.Scene) {
 		State:      c.state,
 		DrumPlayer: c.player,
 		MixedTrack: mixedTrack,
+		ErrorDist:  14,
 	})
 	c.runner.Init(scene)
 }

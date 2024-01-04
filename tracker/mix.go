@@ -17,6 +17,7 @@ type MixedTrack struct {
 type InputNote struct {
 	Time       float64
 	Instrument edrum.InstrumentKind
+	Pattern    int
 }
 
 type MixerConfig struct {
@@ -60,7 +61,7 @@ func Mix(config MixerConfig) (*MixedTrack, error) {
 	// give the player some delay before the main part starts.
 	module.NumPatterns = len(module.Patterns) + 1
 
-	numEmptyRows := 64
+	numEmptyRows := 48
 
 	mixedPatterns := make([]xmfile.Pattern, module.NumPatterns)
 	for i := range module.Patterns {
@@ -118,6 +119,7 @@ func Mix(config MixerConfig) (*MixedTrack, error) {
 				mt.InputChannels[channelID] = append(mt.InputChannels[channelID], InputNote{
 					Instrument: kind,
 					Time:       rowTime,
+					Pattern:    int(patternIndex),
 				})
 			}
 			rowIndex++

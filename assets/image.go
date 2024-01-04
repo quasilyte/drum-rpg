@@ -11,7 +11,8 @@ func registerImageResources(ctx *ge.Context) {
 	imageResources := map[resource.ImageID]resource.ImageInfo{
 		ImageTrackBg: {Path: "image/studio/track_bg.png"},
 
-		ImageNoteEffect: {Path: "image/studio/note_effect.png", FrameWidth: 32},
+		ImageNoteEffect:    {Path: "image/studio/note_effect.png", FrameWidth: 32},
+		ImageNoteHitEffect: {Path: "image/studio/note_hit_effect.png", FrameWidth: 64},
 
 		ImageBarBass:        {Path: "image/studio/bass_bar.png"},
 		ImageBarClosedHiHat: {Path: "image/studio/closed_hihat_bar.png"},
@@ -32,6 +33,7 @@ const (
 	ImageTrackBg
 
 	ImageNoteEffect
+	ImageNoteHitEffect
 
 	ImageBarBass
 	ImageBarClosedHiHat

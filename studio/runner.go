@@ -1,6 +1,8 @@
 package studio
 
 import (
+	"math"
+
 	"github.com/quasilyte/drum-rpg/assets"
 	"github.com/quasilyte/drum-rpg/edrum"
 	"github.com/quasilyte/drum-rpg/midichan"
@@ -18,6 +20,8 @@ type Runner struct {
 	drumPlayer *midichan.Player
 	mixedTrack *tracker.MixedTrack
 
+	errorDist float64
+
 	t               float64
 	visibleNotes    []*noteBarNode
 	channelProgress [4]int
@@ -27,6 +31,8 @@ type RunnerConfig struct {
 	State      *session.State
 	DrumPlayer *midichan.Player
 	MixedTrack *tracker.MixedTrack
+
+	ErrorDist float64
 }
 
 func NewRunner(config RunnerConfig) *Runner {
@@ -34,6 +40,7 @@ func NewRunner(config RunnerConfig) *Runner {
 		state:      config.State,
 		drumPlayer: config.DrumPlayer,
 		mixedTrack: config.MixedTrack,
+		errorDist:  config.ErrorDist,
 	}
 }
 
@@ -65,11 +72,6 @@ func (r *Runner) Init(scene *ge.Scene) {
 		channelID := info.Instrument.Channel()
 		pos := r.getChannelGatePos(channelID)
 
-		e := newEffectNode(pos.Add(gmath.Vec{X: scene.Rand().FloatRange(-2, 2)}), assets.ImageNoteEffect)
-		e.noFlip = true
-		scene.AddObject(e)
-		e.anim.SetSecondsPerFrame(0.03)
-
 		instrumentLabel := "?"
 		switch info.Instrument {
 		case edrum.BassInstrument:
@@ -90,9 +92,60 @@ func (r *Runner) Init(scene *ge.Scene) {
 			instrumentLabel = "floor tom!"
 		}
 
-		textPos := pos.Sub(gmath.Vec{Y: 14}).Add(gmath.Vec{X: scene.Rand().FloatRange(-4, 4)})
-		t := newFloatingTextNode(textPos, instrumentLabel)
-		scene.AddObject(t)
+		var closestNote *noteBarNode
+		closestNoteDist := math.MaxFloat64
+		for _, n := range r.visibleNotes {
+			if n.ChannelID != channelID || n.IsDisposed() {
+				continue
+			}
+			dist := math.Abs(n.Pos.Y - pos.Y)
+			if dist > r.errorDist {
+				continue
+			}
+			if dist < closestNoteDist {
+				closestNoteDist = dist
+				closestNote = n
+			}
+		}
+		if closestNote == nil {
+			// Now try to find the relaxed match, taking the note's speed into account.
+			// We prefer an exact match, this is why this search is done only in case
+			// of no direct hits.
+			// This second loop is needed though: otherwise it's easier to trigger
+			// the note when it's below the gate.
+			noteSpeed := 8.0
+			for _, n := range r.visibleNotes {
+				if n.ChannelID != channelID || n.IsDisposed() {
+					continue
+				}
+				dist := math.Abs((n.Pos.Y + noteSpeed) - (pos.Y))
+				if dist > r.errorDist {
+					continue
+				}
+				if dist < closestNoteDist {
+					closestNoteDist = dist
+					closestNote = n
+				}
+			}
+		}
+
+		if closestNote != nil {
+			closestNote.Dispose()
+
+			e := newEffectNode(pos.Add(gmath.Vec{X: scene.Rand().FloatRange(-3, 3)}), assets.ImageNoteHitEffect)
+			scene.AddObject(e)
+			e.anim.Sprite().SetColorScale(closestNote.sprite.GetColorScale())
+			e.anim.SetSecondsPerFrame(0.03)
+
+			textPos := pos.Sub(gmath.Vec{Y: 14}).Add(gmath.Vec{X: scene.Rand().FloatRange(-4, 4)})
+			t := newFloatingTextNode(textPos, instrumentLabel)
+			scene.AddObject(t)
+		} else {
+			e := newEffectNode(pos.Add(gmath.Vec{X: scene.Rand().FloatRange(-2, 2)}), assets.ImageNoteEffect)
+			e.noFlip = true
+			scene.AddObject(e)
+			e.anim.SetSecondsPerFrame(0.03)
+		}
 	})
 }
 
@@ -120,12 +173,20 @@ func (r *Runner) Update(delta float64) {
 
 	// Advance the visible notes.
 	{
+		missThreshold := r.getChannelGatePos(0).Y + r.errorDist
 		visibleNotes := r.visibleNotes[:0]
 		for _, n := range r.visibleNotes {
+			if n.IsDisposed() {
+				continue
+			}
+			oldY := n.Pos.Y
 			n.Pos.Y = r.calcNoteY(n.Time)
 			if n.Pos.Y > (1080.0/2 + 32.0) {
 				n.Dispose()
 				continue
+			}
+			if oldY <= missThreshold && n.Pos.Y > missThreshold {
+				n.sprite.SetAlpha(0.2)
 			}
 			visibleNotes = append(visibleNotes, n)
 		}
