@@ -1,0 +1,14 @@
+{
+    "Name": "Eye of The Tiger",
+    "Author": "?",
+    "Instruments": {
+        "ClosedHiHat": 8,
+        "Bass": 9,
+        "Snare": 10,
+        "LeftTom": 15,
+        "RightTom": 15,
+        "FloorTom": 16,
+        "OpenHiHat": 12,
+        "LeftCymbal": 13
+    }
+}

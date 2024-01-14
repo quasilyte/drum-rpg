@@ -11,6 +11,7 @@ type MixedTrack struct {
 	Module        *xmfile.Module
 	Stream        *xm.Stream
 	InputChannels [4][]InputNote
+	NumRows       int
 	Duration      float64
 }
 
@@ -61,7 +62,10 @@ func Mix(config MixerConfig) (*MixedTrack, error) {
 	// give the player some delay before the main part starts.
 	module.NumPatterns = len(module.Patterns) + 1
 
-	numEmptyRows := 48
+	secondsPerRow := calcSecondsPerRow(tempo, float64(bpm))
+	patternsPerSecond := 1.0 / secondsPerRow
+
+	numEmptyRows := int(8 * patternsPerSecond)
 
 	mixedPatterns := make([]xmfile.Pattern, module.NumPatterns)
 	for i := range module.Patterns {
@@ -102,7 +106,6 @@ func Mix(config MixerConfig) (*MixedTrack, error) {
 	module.Patterns = mixedPatterns
 
 	// Build the input channels by traversing the patterns in their play order.
-	secondsPerRow := calcSecondsPerRow(tempo, float64(bpm))
 	rowIndex := numEmptyRows
 	for _, patternIndex := range t.Module.PatternOrder {
 		p := &t.Module.Patterns[patternIndex]
@@ -139,6 +142,8 @@ func Mix(config MixerConfig) (*MixedTrack, error) {
 
 	// This is an approximation.
 	mt.Duration = calcRowTime(rowIndex, secondsPerRow)
+
+	mt.NumRows = rowIndex
 
 	return mt, nil
 }

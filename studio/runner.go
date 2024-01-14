@@ -22,6 +22,8 @@ type Runner struct {
 
 	errorDist float64
 
+	minimap *minimapNode
+
 	t               float64
 	visibleNotes    []*noteBarNode
 	channelProgress [4]int
@@ -52,6 +54,15 @@ func (r *Runner) Init(scene *ge.Scene) {
 	bg.Pos.Offset.X = 32
 	scene.AddGraphics(bg)
 	r.bg = bg
+
+	{
+		getReady := newFadingTextNode(bg.BoundsRect().Center().Add(gmath.Vec{X: bg.Pos.Offset.X / 2}), "GET READY")
+		scene.AddObject(getReady)
+	}
+	{
+		r.minimap = newMinimapNode(r.mixedTrack)
+		r.minimap.Init(scene)
+	}
 
 	for i := 0; i < 4; i++ {
 		pos := gmath.Vec{X: r.getChannelGatePos(i).X}
@@ -129,7 +140,7 @@ func (r *Runner) Init(scene *ge.Scene) {
 			}
 		}
 
-		if closestNote != nil {
+		if closestNote != nil && closestNote.Instrument == info.Instrument {
 			closestNote.Dispose()
 
 			e := newEffectNode(pos.Add(gmath.Vec{X: scene.Rand().FloatRange(-3, 3)}), assets.ImageNoteHitEffect)
@@ -194,6 +205,10 @@ func (r *Runner) Update(delta float64) {
 	}
 
 	r.t += delta
+
+	if r.t < r.mixedTrack.Duration {
+		r.minimap.UpdateMarker(r.t)
+	}
 }
 
 func (r *Runner) calcNoteY(noteTime float64) float64 {

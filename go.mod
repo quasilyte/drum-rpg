@@ -7,6 +7,7 @@ require github.com/quasilyte/ge v0.0.0-20240102131349-7696bd01a11f
 require (
 	github.com/ebitengine/oto/v3 v3.1.0 // indirect
 	github.com/ebitengine/purego v0.5.0 // indirect
+	github.com/ebitenui/ebitenui v0.5.5 // indirect
 	github.com/hajimehoshi/bitmapfont/v3 v3.0.0 // indirect
 	github.com/hajimehoshi/ebiten/v2 v2.6.3 // indirect
 	github.com/jezek/xgb v1.1.0 // indirect

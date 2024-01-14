@@ -82,6 +82,7 @@ type Sample struct {
 	AudioID resource.AudioID
 
 	Name string
+	Tag  string
 }
 
 type SampleSelection int

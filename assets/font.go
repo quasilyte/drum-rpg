@@ -13,6 +13,7 @@ var (
 	BitmapFont1 = bitmapfont.Face
 	BitmapFont2 = scaleFont(BitmapFont1, 2)
 	BitmapFont3 = scaleFont(BitmapFont1, 3)
+	BitmapFont4 = scaleFont(BitmapFont1, 4)
 )
 
 func euclidianDiv(x, y int) int {

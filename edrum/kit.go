@@ -1,6 +1,8 @@
 package edrum
 
 type Kit struct {
+	Name string
+
 	NoteMap NoteMap
 
 	InstrumentMap [_numInstruments]*Instrument

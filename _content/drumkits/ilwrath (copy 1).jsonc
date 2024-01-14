@@ -1,0 +1,9 @@
+{
+    "Name": "Ilwrath2",
+
+    "Instruments": {
+        "Bass": {"Key": "UQM/Bass/Ilwrath"},
+        "Snare": {"Key": "UQM/Snare/Ilwrath"},
+        "RightTom": {"Key": "UQM/RightTom/Ilwrath"},
+    },
+}

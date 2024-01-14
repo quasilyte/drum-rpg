@@ -1,0 +1,97 @@
+{
+    "Name": "ColomboADK FreePats",
+
+    "Instruments": [
+        {
+            "Kind": "Bass",
+            "Samples": [
+                {"File": "BassDrum-LV1.wav", "MaxVelocity": 0.25},
+                {"File": "BassDrum-LV2.wav", "MaxVelocity": 0.25},
+                {"File": "BassDrum-MV1.wav", "MinVelocity": 0.25, "MaxVelocity": 0.5},
+                {"File": "BassDrum-MV2.wav", "MinVelocity": 0.25, "MaxVelocity": 0.5},
+                {"File": "BassDrum-HV1.wav", "MinVelocity": 0.5},
+                {"File": "BassDrum-HV2.wav", "MinVelocity": 0.5},
+                {"File": "BassDrum-HV3.wav", "MinVelocity": 0.5},
+                {"File": "BassDrum-HV4.wav", "MinVelocity": 0.5},
+            ]
+        },
+
+        {
+            "Kind": "LeftTom",
+            "Samples": [
+                {"File": "HiTom-1.wav"},
+                {"File": "HiTom-2.wav"},
+                {"File": "HiTom-3.wav"},
+            ],
+        },
+
+        {
+            "Kind": "RightTom",
+            "Samples": [
+                {"File": "MidTom-1.wav"},
+                {"File": "MidTom-2.wav"},
+                {"File": "MidTom-3.wav"},
+            ],
+        },
+
+        {
+            "Kind": "FloorTom",
+            "Samples": [
+                {"File": "LowTom-1.wav"},
+                {"File": "LowTom-2.wav"},
+            ],
+        },
+
+        {
+            "Kind": "Snare",
+            "Samples": [
+                {"File": "SnareDrum2-1.wav"},
+                {"File": "SnareDrum2-2.wav"},
+                {"File": "SnareDrum2-3.wav"},
+                {"File": "SnareDrum2-4.wav"},
+            ],
+        },
+
+        {
+            "Kind": "OpenHiHat",
+            "Samples": [
+                {"File": "OpenHiHat-1.wav"},
+                {"File": "OpenHiHat-2.wav"},
+                {"File": "OpenHiHat-3.wav"},
+                {"File": "OpenHiHat-4.wav"},
+            ]
+        },
+
+        {
+            "Kind": "ClosedHiHat",
+            "Samples": [
+                {"File": "ClosedHiHat-1.wav"},
+                {"File": "ClosedHiHat-2.wav"},
+                {"File": "ClosedHiHat-3.wav"},
+                {"File": "ClosedHiHat-4.wav"},
+                {"File": "ClosedHiHat-5.wav"},
+                {"File": "ClosedHiHat-6.wav"},
+                {"File": "ClosedHiHat-7.wav"}
+            ],
+        },
+
+        {
+            "Kind": "LeftCymbal",
+            "Samples": [
+                {"File": "Cymbal16iCrash-1.wav"},
+                {"File": "Cymbal16iCrash-2.wav"},
+            ],
+        },
+
+        {
+            "Kind": "RightCymbal",
+            "Samples": [
+                {"File": "Cymbal16iRide-MV1.wav", "MaxVelocity": 0.5},
+                {"File": "Cymbal16iRide-MV2.wav", "MaxVelocity": 0.5},
+                {"File": "Cymbal16iRide-MV3.wav", "MaxVelocity": 0.5},
+                {"File": "Cymbal16iRide-HV1.wav", "MinVelocity": 0.5},
+                {"File": "Cymbal16iRide-HV2.wav", "MinVelocity": 0.5},
+            ],
+        },
+    ],
+}

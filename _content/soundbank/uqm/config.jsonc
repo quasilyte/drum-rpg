@@ -1,0 +1,26 @@
+{
+    "Name": "UQM",
+
+    "Instruments": [
+        {"Kind": "Bass", "Tag": "Arilou", "Samples": [{"File": "arilou_bass.wav"}]},
+        {"Kind": "Snare", "Tag": "Arilou", "Samples": [{"File": "arilou_snare.wav"}]},
+        {"Kind": "ClosedHiHat", "Tag": "Arilou", "Samples": [{"File": "arilou_hihat.wav"}]},
+
+        {"Kind": "Bass", "Tag": "Druuge", "Samples": [{"File": "druuge_bass.wav"}]},
+        {"Kind": "Snare", "Tag": "Druuge", "Samples": [{"File": "druuge_snare.wav"}]},
+        {"Kind": "LeftTom", "Tag": "Druuge", "Samples": [{"File": "druuge_tom.wav"}]},
+        {"Kind": "RightTom", "Tag": "Druuge", "Samples": [{"File": "druuge_tom.wav"}]},
+
+        {"Kind": "Bass", "Tag": "Ilwrath", "Samples": [{"File": "ilwrath_bass.wav"}]},
+        {"Kind": "Snare", "Tag": "Ilwrath", "Samples": [{"File": "ilwrath_snare.wav"}]},
+        {"Kind": "RightTom", "Tag": "Ilwrath", "Samples": [{"File": "ilwrath_right_tom.wav"}]},
+
+        {"Kind": "Bass", "Tag": "HyperSpace", "Samples": [{"File": "hyperspace_bass.wav"}]},
+        {"Kind": "Snare", "Tag": "HyperSpace", "Samples": [{"File": "hyperspace_snare.wav"}]},
+        {"Kind": "ClosedHiHat", "Tag": "HyperSpace", "Samples": [{"File": "hyperspace_hihat.wav"}]},
+
+        {"Kind": "Bass", "Tag": "Thraddash", "Samples": [{"File": "thraddash_bass.wav"}]},
+        {"Kind": "Snare", "Tag": "Thraddash", "Samples": [{"File": "thraddash_snare.wav"}]},
+        {"Kind": "ClosedHiHat", "Tag": "Thraddash", "Samples": [{"File": "thraddash_hihat.wav"}]},
+    ],
+}
