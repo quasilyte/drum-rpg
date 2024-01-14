@@ -1,0 +1,9 @@
+game:
+* pattern jumps break the tracker timings
+
+bugs:
+* sometimes the note bars bug out (invalid pos?)
+* a floating text was not disposed once
+
+tracks:
+* eye of the tiger contains a lot of unnecessary crash-notes inside closed 1/8 hihat sequences
